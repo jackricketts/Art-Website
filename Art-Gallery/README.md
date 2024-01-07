@@ -1,6 +1,6 @@
 # Art Gallery
 **by Jack Ricketts**
-This project was used to practice/gain experience in using nodeJS, Express, MongoDB, and Pug
+- This project was used to practice/gain experience in using nodeJS, Express, MongoDB, and Pug
 # Starting the Program
 ## Download the required applications
 - Download MongoDB and MongoDB Compass
