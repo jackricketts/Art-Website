@@ -1,0 +1,23 @@
+doctype html
+html(lang='en')
+    head
+        title Register
+    script(src="/regClient.js")
+    body(onload="initRegister()")
+        if logged 
+            include ../partials/headLog
+        else 
+            include ../partials/headNotLog
+        h1 Register New Account
+        label(for='username') Username:
+        input(type='text', id='username', required)
+        br
+        label(for='password') Password:
+        input(type='password', id='password', required)
+        br
+        label(for='age') Age: 
+        input(type="text", id="age", required)
+        br
+        input(type='submit', value='Register' id="submitReg")
+        p Already have an account? 
+            a(href='/login') Login here.

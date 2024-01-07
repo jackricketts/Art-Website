@@ -1,0 +1,15 @@
+doctype html 
+html(lang='en')
+    head 
+        title #{owner.username}'s Workshop
+    script(src="/workInfoClient.js")
+    body(onload=`initEnroll('${owner._id}', '${workshop.id}', ${workshop.enrolled.includes(currUser.username)})`) 
+        include ../partials/headLog
+        if workshop.enrolled.length > 0
+            h3 Users Enrolled in #{workshop.name}
+            each user in workshop.enrolled
+                h3 #{user}
+        else 
+            h3 Nobody Enrolled!
+        if currUser.username != owner.username && !workshop.enrolled.includes(currUser.username)
+            button(type="button", id="submitEnroll") Enroll

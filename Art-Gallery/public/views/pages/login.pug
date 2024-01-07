@@ -1,0 +1,20 @@
+doctype html
+html(lang='en')
+    head
+        title Login
+    script(src="/logClient.js")
+    body(onload="initLogin()")
+        if logged 
+            include ../partials/headLog
+        else 
+            include ../partials/headNotLog
+        h1 Login
+        label(for='username') Username:
+        input(type='text', id='username', required)
+        br
+        label(for='password') Password:
+        input(type='password', id='password', required)
+        br
+        input(type='submit', value='Login' id="submitLog")
+        p Don't have an account? 
+            a(href='/register') Register here.

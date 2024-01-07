@@ -1,0 +1,106 @@
+doctype html 
+html(lang='en')
+    link(rel='stylesheet', type='text/css', href='/styles.css')
+    head
+        title #{userPage.username}'s Profile
+    body
+        if currUser
+            include ../partials/headLog
+        else 
+            include ../partials/headNotLog
+        if currUser == userPage && currUser.artist
+            h3 Workshops 
+            if userPage.workshops.length == 0
+                p You don't have any workshops! Why not add one?
+                a(href="/workshop")
+                    button(type="button") Add Workshop
+            else 
+                each workshop in userPage.workshops 
+                    a(href=`/workshop/${workshop.id}/${userPage._id}`)
+                        h3 #{workshop.name}
+                a(href="/workshop")
+                    button(type="button") Add Workshop
+        else if currUser != userPage && currUser
+            h3 Workshops 
+            if userPage.workshops.length == 0
+                p This user doesn't have any workshops!
+            else 
+                each workshop in userPage.workshops 
+                    a(href=`/workshop/${workshop.id}/${userPage._id}`)
+                        h3 #{workshop.name}
+        else if !currUser
+            h3 Workshops 
+            p Log in to view workshops! 
+            a(href="/login")
+                button(type=button) Login
+        div(class="profileBox")
+            if userPage.artist == true 
+                h4(style="font-weight: normal") Artist
+            else 
+                h4(style="font-weight: normal") Patron
+            h3 #{userPage.username}
+            h3 
+                | Followers: 
+                a(href=`/followers/${userPage._id}`) #{userPage.followers.length}
+            h3 
+                | Following: 
+                a(href=`/following/${userPage._id}`) #{userPage.following.length}
+                    
+            if currUser != userPage && currUser
+                if userPage.followers.includes(currUser._id)
+                    a(href=`/follow/${userPage._id}`)
+                        button(type="button") Unfollow #{userPage.username}
+                else
+                    h4(style="font-weight: normal") Follow this artist!
+                    br
+                    a(href=`/follow/${userPage._id}`)
+                        button(type="button") Follow #{userPage.username}
+            else if !currUser
+                h4(style="font-weight: normal") 
+                    | Login to follow this artist! 
+                    a(href=`/login`)
+                        button(type="button") Login
+            else if currUser == userPage
+                a(href='/logout')
+                    button(type="button") Logout 
+                if currUser.artist
+                    a(href='/change')
+                        button(type="button") Change to Patron
+                    a(href='/artwork')
+                        button(type="button") Add Artwork
+                    a(href='/liked')
+                        button(type="button") View Liked Art
+                else
+                    if currUser.artworks.length > 0
+                        a(href='/change')
+                            button(type="button") Change to Artist
+                    else
+                        a(href='/artwork')
+                            button(type="button") Change to Artist
+
+            
+        if userPage.artworks.length > 0
+            h2(style="text-align: center") Artworks by #{userPage.username}
+            div(style="text-align: center")
+                each artwork in userPage.artworks
+                    img(src=artwork.Poster, alt="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/West_bank.png/1920px-West_bank.png", style="width: 10%; height: 10%")
+                    br
+                    if artwork.likedBy
+                    if currUser && currUser != userPage
+                        if currUser.likedArtworks.includes(artwork._id)
+                            a(href=`/like/${artwork._id}/user`)
+                                button(type="button") Remove Like
+                        else
+                            a(href=`/like/${artwork._id}/user`)
+                                button(type="button") Like
+                        a(href=`/review/${artwork._id}`)
+                                button(type="button") Add Review
+                        a(href=`/reviews/${artwork._id}`)
+                            button(type="button") View All Reviews
+                    a(href=`/artwork/${artwork._id}`)
+                        p #{artwork.Title}
+                    p Likes: #{artwork.LikedBy.length}
+                    br
+                    
+        else 
+            h2(style="text-align: center") #{userPage.username} does not have any artworks yet!

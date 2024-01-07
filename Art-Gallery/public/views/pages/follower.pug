@@ -1,0 +1,15 @@
+doctype html 
+html(lang='en')
+    head 
+        title #{followUser.username}'s Followers
+    body 
+        if logged
+            include ../partials/headLog
+        else 
+            include ../partials/headNotLog
+        h3 #{followUser.username}'s Followers
+        each follower in followUser.followers
+            h3 
+                a(href=`/user/${follower._id}`) #{follower.username}
+        
+            

@@ -1,0 +1,30 @@
+doctype html 
+html(lang='en')
+    head 
+        title Add Artwork 
+    script(src="/artClient.js")
+    body(onload="initArtwork()")
+        include ../partials/headLog
+        if currUser.artworks.length == 0
+            p You must add one piece of artwork to your account before becoming an artist! 
+        h1 Add New Artwork
+        label(for='title') Title:
+        input(type='text', id='title', required)
+        br
+        label(for='year') Publication Year:
+        input(type='text', id='year', required)
+        br
+        label(for='category') Category: 
+        input(type="text", id="category", required)
+        br
+        label(for='medium') Medium: 
+        input(type="text", id="medium", required)
+        br
+        label(for='description') Description: 
+        input(type="text", id="description", required)
+        br
+        label(for='poster') Poster/Link To Artwork: 
+        input(type="text", id="poster", required)
+        br
+        input(type='submit', value='Add Artwork' id="submitArt")
+        

@@ -1,0 +1,12 @@
+div#header
+    a(href='/') Home
+    | 
+    a(href='/find') Search
+    |
+    div(style="float: right")
+        if currUser
+            a(href=`/user/${currUser._id}`) Profile
+            | 
+            span(separator)
+            | 
+        a(href=`/notifications`) Notifications

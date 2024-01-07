@@ -1,0 +1,15 @@
+doctype html 
+html(lang="en")
+    head 
+        title Add Workshop 
+    script(src="/workClient.js")
+    body(onload=`initWorkshop('${(currUser._id)}')`)
+    body
+        include ../partials/headLog
+        br
+        br
+        br
+        label(for="name") Workshop Name: 
+        input(type="text", id="name", required)
+        br
+        input(type="submit", id="submitWork", value="Submit")

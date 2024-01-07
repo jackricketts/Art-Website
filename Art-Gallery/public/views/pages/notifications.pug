@@ -1,0 +1,14 @@
+doctype html 
+html(lang='en')
+    head 
+        title Notifications 
+    body 
+        include ../partials/headLog
+        if currUser.notifications.length > 0
+            each notification in currUser.notifications 
+                p #{notification}
+                br
+                a(href=`/clear`) 
+                    button(type="button") Clear Notifications
+        else 
+            h3 No New Notifications!

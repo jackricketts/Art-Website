@@ -1,0 +1,42 @@
+doctype html
+html(lang='en')
+    head
+        title Reviews for #{artwork.Title}
+    body 
+        if logged 
+            include ../partials/headLog
+        else
+            include ../partials/headNotLog
+        if logged
+            if artwork.Reviews.length == 0 && currUser.username != artwork.Artist
+                img(src=artwork.Poster, alt=artwork.Title, style="width: 20%")
+                h3 #{artwork.Title}
+                h3 No reviews! Why not add one?  
+            else if artwork.Reviews.length == 0 && currUser.username == artwork.Artist
+                img(src=artwork.Poster, alt=artwork.Title, style="width: 20%")
+                h3 No reviews for #{artwork.Title} 
+        else 
+            h3 No reviews for #{artwork.Title}
+        if artwork.Reviews.length > 0
+            h3 Reviews For 
+            img(src=artwork.Poster, alt=artwork.Title, style="width: 20%")
+            h3 #{artwork.Title}
+            - let numNulls = 0;
+            each review in artwork.Reviews
+                if !review
+                    - numNulls++
+            if numNulls == artwork.Reviews.length
+                h3 No reviews! Why not add one?
+            else 
+                each review in artwork.Reviews
+                    if review
+                        a(href=`/user/${review.userID}`)  #{review.name}
+                        p #{review.review}
+                        if currUser && currUser.username == review.name 
+                            a(href=`/review/${artwork._id}/${review.reviewID}`)
+                                button(type="button") Delete Review
+                        br
+        if currUser && currUser.username != artwork.Artist && logged
+            a(href=`/review/${artwork._id}`)
+                button(type="button") Add Review 
+        

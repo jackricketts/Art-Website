@@ -1,0 +1,33 @@
+doctype html
+html(lang='en')
+    head 
+        title #{currArt.title}
+    body
+        if logged 
+            include ../partials/headLog
+        else 
+            include ../partials/headNotLog
+        div(style='text-align: center')
+            img(src=currArt.Poster, alt=currArt.Title, style="width: 30%")
+        h2 #{currArt.Title}
+        if logged && currUser.username != currArt.Artist
+            if currUser.likedArtworks.includes(currArt._id)
+                a(href=`/like/${currArt._id}/info`)
+                    button(type="button" id="like") Remove Like
+            else
+                a(href=`/like/${currArt._id}/info`)
+                    button(type="button") Like
+            a(href=`/review/${currArt._id}`)
+                button(type="button") Add Review 
+        a(href=`/reviews/${currArt._id}`)
+            button(type="button") View All Reviews
+                
+        p Likes: #{currArt.LikedBy.length}
+        h3
+            | by 
+            a(href=`/user/${userId}`) #{currArt.Artist}
+        h3 Published in #{currArt.Year}
+        h3 Type of art: #{currArt.Category}
+        h3 Made using #{currArt.Medium}
+        br
+        p #{currArt.Description}

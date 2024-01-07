@@ -1,0 +1,17 @@
+doctype html
+html(lang='en')
+    head
+        title Add Review 
+    script(src="/revClient.js")
+    body(onload=`initReview('${(artwork._id)}')`)
+        if logged 
+            include ../partials/headLog
+        else
+            include ../partials/headNotLog
+        img(src=artwork.Poster, alt=artwork.Title, style="width: 30%")
+        h3 Add Review for #{artwork.Title}
+        p Write Review Below 
+        br
+        textarea(id="review", row=5, required)
+        br
+        input(type="submit", value="Submit Review", id="submitReview")

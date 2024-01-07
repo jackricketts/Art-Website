@@ -1,0 +1,14 @@
+doctype html
+html(lang='en')
+    head 
+        title Liked Art 
+    body 
+        include ../partials/headLog
+        if currUser.likedArtworks.length == 0
+            h3 No liked art!
+        else
+            h3 Liked Art
+            each artwork in currUser.likedArtworks
+                img(src=artwork.Poster, alt=artwork.Title, style="width: 20%")
+                h3 
+                    a(href=`/artwork/${artwork._id}`) #{artwork.Title}

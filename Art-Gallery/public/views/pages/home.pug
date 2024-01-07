@@ -1,0 +1,16 @@
+doctype html 
+html(lang='en')
+    head 
+        title Gallery Home 
+    body 
+        // Learned how to use display: flex so that the things at the top of the screen would stay (in headNotLog file)
+        if logged 
+            include ../partials/headLog
+        else 
+            include ../partials/headNotLog
+        a(href=`artwork/${artwork._id}`) 
+            h1(style="text-align: center") #{artwork.Title}
+        div(style="text-align: center") 
+            img(src=artwork.Poster, style="width: 20%; height: 20%;")
+        p(style="text-align: center") Click the link above to learn more about this piece of art!
+        

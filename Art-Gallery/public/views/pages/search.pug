@@ -1,0 +1,22 @@
+doctype html
+html(lang='en')
+    head 
+        title Search Artworks 
+    script(src="/search.js")
+    body
+        if logged
+            include ../partials/headLog
+        else 
+            include ../partials/headNotLog
+        div(id="search", style="width: 40%; float: left")
+            label(for="artist") Artist Name: 
+            input(type="text", id="artist")
+            br
+            label(for="art") Art Name: 
+            input(type="text", id="art")
+            br
+            label(for="category") Category: 
+            input(type="text", id="category")
+            br
+            input(type="submit", value="Search", id="submitSearch")
+        div(id="artworks", style="float:left; width: 60%")
